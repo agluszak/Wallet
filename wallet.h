@@ -4,6 +4,7 @@
 //
 
 #include <string>
+#include <type_traits>
 
 
 // Class for keeping track of the transaction history.
@@ -11,6 +12,11 @@ class History
 {
 
 };
+
+
+//template <typename T>
+//using IntegerType = std::enable_if_t<std::is_same_v<T, int> || std::is_same_v<T, short> ||
+//        std::is_same_v<T, long long>>;
 
 
 class Wallet
@@ -26,7 +32,8 @@ public:
 
     // Constructs a new Wallet with n coins. Throws an exception if new coins
     // would exceed the limit.
-    explicit Wallet(long long n);
+    //template <typename T, typename = IntegerType<T>>
+    Wallet(long long n);
 
     // Constructs a new Wallet with the number of coins equal
     // to the str. It ignores trailing whitespaces and can accept
@@ -63,3 +70,10 @@ private:
     History history {}; // TODO: Consider whether a separate class is really necessary
 
 };
+
+
+// Returns an empty Wallet object that is immutable
+const Wallet Empty();
+
+
+bool operator<(Wallet &&left, Wallet &&right);

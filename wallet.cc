@@ -6,10 +6,12 @@
 
 long long Wallet::totalCoins = 0;
 
+//template <typename T, typename = IntegerType<T>>
 Wallet::Wallet(long long n) : coins(n)
 {
     // TODO: Decide what exception to throw if new coins exceeded the limit. Maybe custom one?
     totalCoins += coins;
+    std::cout << "Constructor call with " << coins << "\n";
 };
 
 Wallet::Wallet(const std::string &str) : coins(std::stoll(str))
@@ -49,4 +51,14 @@ long long Wallet::getUnits() const
 int Wallet::opSize() const
 {
     return 0;
+}
+
+const Wallet Empty()
+{
+    return Wallet();
+}
+
+bool operator<(Wallet &&left, Wallet &&right)
+{
+    return 1;
 }
